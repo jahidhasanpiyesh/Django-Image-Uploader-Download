@@ -6,7 +6,6 @@ def home(req):
         form = ImageForm(req.POST, req.FILES)
         if form.is_valid():
             form.save()
-            form = ImageForm()
-    else:
-        form = ImageForm() 
+    form = ImageForm() 
     return render(req, 'home/home.html', {'form': form}) 
+
