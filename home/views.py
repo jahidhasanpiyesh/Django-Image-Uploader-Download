@@ -1,6 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import ImageForm
 from .models import Image
+from django.contrib.auth import authenticate, login as auth_login
+from django.contrib.auth.models import User
+from django.contrib import messages
+from .forms import SignUpForm
 # Create your views here.
 def home(req):
     if req.method == 'POST':
@@ -12,6 +16,18 @@ def home(req):
     img = Image.objects.all() # Fetch all Image objects from the database.
     return render(req, 'home/home.html', {'img':img, 'form': form}) 
 
+def login(req):
+    if req.method == 'POST':
+        email = req.POST.get('email')
+        password = req.POST.get('password')
+        user = authenticate(username=email, password=password)
+        if user:
+            auth_login(req, user)
+            return redirect('home')
+        else:
+            messages.error(req, "Invalid email or password")
+
+    return render(req, 'home/signup.html')
 
 def signup(req):
     return render(req, 'home/signup.html')

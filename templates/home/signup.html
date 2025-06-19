@@ -26,23 +26,26 @@
     <!-- Login Form Section -->
     <div class="login form">
         <header>Login</header>
-        <form action="#">
-            <!-- Email Input -->
-            <input type="text" placeholder="Enter your email">
-            <!-- Password Input -->
-            <input type="password" placeholder="Enter your password">
-            <!-- Forgot password link -->
-            <a href="#">Forgot password?</a>
-            <!-- Login button -->
-            <input type="button" class="button" value="Login">
-        </form>
+        <form method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+            <form action="#">
+                <!-- Email Input -->
+                <input type="text" placeholder="Enter your email">
+                <!-- Password Input -->
+                <input type="password" placeholder="Enter your password">
+                <!-- Forgot password link -->
+                <a href="#">Forgot password?</a>
+                <!-- Login button -->
+                <input type="button" class="button" value="Login">
+            </form>
+        </form><!-- Link to toggle to Signup form -->
 
-        <!-- Link to toggle to Signup form -->
+    
         <div class="signup">
             <span class="signup">
                 Don't have an account?
                 <!-- This label triggers the checkbox to show the signup form -->
-                <label for="check">Signup</label>
+                <a href="{% url 'signup' %}"><label for="check">Signup</label></a>
             </span>
         </div>
     </div>
