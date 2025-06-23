@@ -13,7 +13,7 @@ block link %}
     <a href="{% url 'home' %}" class="btn btn-secondary">&larr; Back to Home</a>
   </div>
 
-  {"block login_form"}
+  {% block user %}
   <!-- Hidden checkbox for toggling between login and signup forms -->
   <input type="checkbox" id="check" />
 
