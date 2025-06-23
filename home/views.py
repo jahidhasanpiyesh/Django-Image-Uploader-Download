@@ -30,4 +30,18 @@ def login(req):
     return render(req, 'home/signup.html')
 
 def signup(req):
-    return render(req, 'home/signup.html')
+    if req.method == 'POST':
+        form = SignUpForm(req.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_data["password1"])
+            user.username = form.cleaned_data["email"]
+            user.save()
+            messages.success(req, "Account created successfully")
+            return redirect('login')
+        else:
+            messages.error(req, "Signup failed. Please fix the errors below.")
+    else:
+        form = SignUpForm()
+    return render(req, 'home/signup.html', {'form': form})
+    
