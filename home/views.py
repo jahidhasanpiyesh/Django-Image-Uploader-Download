@@ -27,7 +27,7 @@ def login(req):
         else:
             messages.error(req, "Invalid email or password")
 
-    return render(req, 'home/signup.html')
+    return render(req, 'home/login.html')
 
 def signup(req):
     if req.method == 'POST':

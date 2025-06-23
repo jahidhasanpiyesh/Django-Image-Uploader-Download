@@ -1,11 +1,17 @@
-{% block login_template %} {% extends 'home/home.html' %} {% load static %} {%
-block link %}
+{% extends 'home/home.html' %}
+{% load static %}
+
+{% block link %}
 <!-- Linking external CSS for styling -->
 <link rel="stylesheet" href="{% static 'home/signup.css' %}" />
-{% endblock %} {% block title %}
+{% endblock %}
+
+{% block title %}
 <!-- Page title -->
 <title>Login-User</title>
-{% endblock %} {% block body %}
+{% endblock %}
+
+{% block body %}
 <!-- Main container for login and registration forms -->
 <div class="container">
   <!-- Back to Home Button (visible to guide users back) -->
@@ -22,23 +28,20 @@ block link %}
     <header>Login</header>
     <form method="POST" action="{% url 'login' %}">
       {% csrf_token %}
-      <form action="#">
-        <!-- Email Input -->
-        <input type="text" placeholder="Enter your email" />
-        <!-- Password Input -->
-        <input type="password" placeholder="Enter your password" />
-        <!-- Forgot password link -->
-        <a href="#">Forgot password?</a>
-        <!-- Login button -->
-        <input type="button" class="button" value="Login" />
-      </form>
+      <!-- Email Input -->
+      <input type="text" name="email" placeholder="Enter your email" required />
+      <!-- Password Input -->
+      <input type="password" name="password" placeholder="Enter your password" required />
+      <!-- Forgot password link -->
+      <a href="#">Forgot password?</a>
+      <!-- Login button -->
+      <input type="submit" class="button" value="Login" />
     </form>
-    <!-- Link to toggle to Signup form -->
 
+    <!-- Link to toggle to Signup form -->
     <div class="signup">
       <span class="signup">
         Don't have an account?
-        <!-- This label triggers the checkbox to show the signup form -->
         <a href="{% url 'signup' %}"><label for="check">Signup</label></a>
       </span>
     </div>
@@ -48,4 +51,4 @@ block link %}
 
 <!-- Linking JavaScript file (if required for toggle/animation logic) -->
 <script src="{% static 'js/script.js' %}"></script>
-{% endblock %} {% endblock %}
+{% endblock %}
