@@ -8,45 +8,68 @@
 
 {% block title %}
 <!-- Page title -->
-<title>Login-User</title>
+<title>Sign-Up</title>
 {% endblock %}
 
 {% block body %}
 <!-- Main container for login and registration forms -->
 <div class="container">
-  <!-- Back to Home Button (visible to guide users back) -->
-  <div style="margin: 20px 0">
-    <a href="{% url 'home' %}" class="btn btn-secondary">&larr; Back to Home</a>
-  </div>
 
-{% block user %}
-  <!-- Hidden checkbox for toggling between login and signup forms -->
-  <input type="checkbox" id="check" />
-
-  <!-- Login Form Section -->
-  <div class="login form">
-    <header>Login</header>
-    <form method="POST" action="{% url 'login' %}">
-      {% csrf_token %}
-      <!-- Email Input -->
-      <input type="text" name="email" placeholder="Enter your email" required />
-      <!-- Password Input -->
-      <input type="password" name="password" placeholder="Enter your password" required />
-      <!-- Forgot password link -->
-      <a href="#">Forgot password?</a>
-      <!-- Login button -->
-      <input type="submit" class="button" value="Login" />
-    </form>
-
-    <!-- Link to toggle to Signup form -->
-    <div class="signup">
-      <span class="signup">
-        Don't have an account?
-        <a href="{% url 'signup' %}"><label for="check">Signup</label></a>
-      </span>
+    <!-- Back to Home Button (visible to guide users back) -->
+    <div style="margin: 20px 0;">
+        <a href="{% url 'home' %}" class="btn btn-secondary">&larr; Back to Home</a>
     </div>
-  </div>
-{% endblock %}
+
+    <!-- Hidden checkbox for toggling between login and signup forms -->
+    <input type="checkbox" id="check">
+
+    <!-- Login Form Section -->
+    <div class="login form">
+        <header>Login</header>
+        <form action="#">
+            <!-- Email Input -->
+            <input type="text" placeholder="Enter your email">
+            <!-- Password Input -->
+            <input type="password" placeholder="Enter your password">
+            <!-- Forgot password link -->
+            <a href="#">Forgot password?</a>
+            <!-- Login button -->
+            <input type="button" class="button" value="Login">
+        </form>
+
+        <!-- Link to toggle to Signup form -->
+        <div class="signup">
+            <span class="signup">
+                Don't have an account?
+                <!-- This label triggers the checkbox to show the signup form -->
+                <label for="check">Signup</label>
+            </span>
+        </div>
+    </div>
+
+    <!-- Signup Form Section -->
+    <div class="registration form">
+        <header>Signup</header>
+        <form action="#">
+            <!-- Email Input -->
+            <input type="text" placeholder="Enter your email">
+            <!-- Create Password -->
+            <input type="password" placeholder="Create a password">
+            <!-- Confirm Password -->
+            <input type="password" placeholder="Confirm your password">
+            <!-- Signup Button -->
+            <input type="button" class="button" value="Signup">
+        </form>
+
+        <!-- Link to toggle back to Login form -->
+        <div class="signup">
+            <span class="signup">
+                Already have an account?
+                <!-- This label triggers the checkbox to show the login form -->
+                <label for="check">Login</label>
+            </span>
+        </div>
+    </div>
 </div>
 
 <!-- Linking JavaScript file (if required for toggle/animation logic) -->
