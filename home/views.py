@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate,login
 from django.contrib.auth.models import User
 from django.contrib import messages
 from .forms import ImageForm
@@ -15,6 +16,17 @@ def home(req):
     return render(req, 'home/home.html', {'img':img, 'form': form}) 
 
 def login(req):
+    if req.method == 'POST':
+        log_email = req.POST.get('email')
+        log_pass = req.POST.get('password')
+        
+        user = authenticate(req, email=log_email, password = log_pass) # Authenticate the user with the provided email and password.
+        if user is not None: # If the user is authenticated, proceed to log them in.
+            login(req, user) # If the user is authenticated, log them in.
+            return redirect('home')
+        else:
+            messages.error(req, 'Invalid credentials! Please try again.') # If authentication fails, show an error message.
+            return redirect('login') 
     return render(req, 'home/login.html')
 
 def signup(req):
