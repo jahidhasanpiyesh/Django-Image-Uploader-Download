@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     
     # I was a create my project base new applications
     'home',
-    'user',
 ]
 
 MIDDLEWARE = [
