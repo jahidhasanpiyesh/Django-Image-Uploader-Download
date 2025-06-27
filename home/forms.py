@@ -1,8 +1,5 @@
 from django import forms
 from .models import Image
-from django.contrib.auth.models import User
-from django.contrib.auth.forms import AuthenticationForm
-
 class ImageForm(forms.ModelForm):
     class Meta:
         model = Image
