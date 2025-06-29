@@ -51,15 +51,7 @@
       <div class="py-5 text-center bg-secondary text-white rounded">
         <h1 class="mb-3">Photo Uploader</h1>
 
-        <!-- Search Form -->
         {% if request.user.is_authenticated %}
-        <form method="get" class="mb-4 d-flex justify-content-center align-items-center gap-2 flex-wrap">
-          <input type="text" name="q" placeholder="Search by name or title" class="form-control" style="max-width: 300px;" value="">
-          <input type="submit" value="Search" class="btn btn-primary">
-        </form>
-
-        {% else %}
-
         <form
           action=""
           method="post"
@@ -69,6 +61,14 @@
           {% csrf_token %} {{ form }}
           <input type="submit" class="btn btn-danger" value="Upload" />
         </form>
+
+        {% else %}
+        <!-- Search Form -->
+        <form method="get" class="mb-4 d-flex justify-content-center align-items-center gap-2 flex-wrap">
+          <input type="text" name="q" placeholder="Search by name or title" class="form-control" style="max-width: 300px;" value="">
+          <input type="submit" value="Search" class="btn btn-primary">
+        </form>
+        
         {% endif %}
         
       </div>
