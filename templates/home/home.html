@@ -54,7 +54,7 @@
         <!-- Search Form -->
         {% if request.user.is_authenticated %}
         <form method="get" class="mb-4 d-flex justify-content-center align-items-center gap-2 flex-wrap">
-          <input type="text" name="q" placeholder="Search by name or title" class="form-control" style="max-width: 300px;" value="{{ request.GET.q }}">
+          <input type="text" name="q" placeholder="Search by name or title" class="form-control" style="max-width: 300px;" value="">
           <input type="submit" value="Search" class="btn btn-primary">
         </form>
 
