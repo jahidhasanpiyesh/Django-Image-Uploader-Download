@@ -31,15 +31,17 @@ def home(request):
     query_raw = request.GET.get('search', '')
     query = query_raw.strip()
 
-    if query:
-        # word‑boundary regex: exact keyword match within comma‑separated list
-        regex = r'\b{}\b'.format(re.escape(query))
-        images = Image.objects.filter(
-            Q(keywords__iregex=regex) |    # keywords ক্ষেত্র
-            Q(caption__icontains=query)    # caption ক্ষেত্র
-        ).order_by('-date')
+    if request.user.is_authenticated:
+        if query:
+            regex = r'\b{}\b'.format(re.escape(query))
+            images = Image.objects.filter(
+                Q(user=request.user),  # 👈 Only show user's images
+                Q(keywords__iregex=regex) | Q(caption__icontains=query)
+            ).order_by('-date')
+        else:
+            images = Image.objects.filter(user=request.user).order_by('-date')  # 👈 Only user's uploads
     else:
-        images = Image.objects.all().order_by('-date')
+        images = []  # If not logged in, show nothing
 
     context = {
         'form': form,
