@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.db.models import Q
-import re                        # ← regex সার্চের জন্য
+import re  # regex search
 
 from .forms import ImageForm
 from .models import Image
@@ -31,17 +31,25 @@ def home(request):
     query_raw = request.GET.get('search', '')
     query = query_raw.strip()
 
-    if request.user.is_authenticated:
-        if query:
-            regex = r'\b{}\b'.format(re.escape(query))
+    if query:
+        regex = r'\b{}\b'.format(re.escape(query))
+
+        if request.user.is_authenticated:
+            # Logged-in users see only their own uploads
             images = Image.objects.filter(
-                Q(user=request.user),  # 👈 Only show user's images
+                Q(user=request.user),
                 Q(keywords__iregex=regex) | Q(caption__icontains=query)
             ).order_by('-date')
         else:
-            images = Image.objects.filter(user=request.user).order_by('-date')  # 👈 Only user's uploads
+            # Anonymous users see all images
+            images = Image.objects.filter(
+                Q(keywords__iregex=regex) | Q(caption__icontains=query)
+            ).order_by('-date')
     else:
-        images = []  # If not logged in, show nothing
+        if request.user.is_authenticated:
+            images = Image.objects.filter(user=request.user).order_by('-date')
+        else:
+            images = Image.objects.all().order_by('-date')
 
     context = {
         'form': form,
@@ -71,8 +79,8 @@ def login_view(request):
 def signup(request):
     if request.method == 'POST':
         username = request.POST.get('username')
-        pass1    = request.POST.get('password1')
-        pass2    = request.POST.get('password2')
+        pass1 = request.POST.get('password1')
+        pass2 = request.POST.get('password2')
 
         if pass1 != pass2:
             messages.error(request, 'Passwords do not match!')
