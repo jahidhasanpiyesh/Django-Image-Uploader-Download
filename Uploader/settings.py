@@ -25,6 +25,7 @@ SECRET_KEY = 'django-insecure-7r*zghpr^(5hjo41a6(ki#&8$1mltn86grdhbk7w$!awen&=)x
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# Hosts/domain names that are valid for this site; required if DEBUG is False
 ALLOWED_HOSTS = []
 
 
@@ -40,7 +41,7 @@ INSTALLED_APPS = [
     
     # I was a create my project base new applications
     'home',
-    # অন্যান্য অ্যাপ
+    # another application
     'crispy_forms',
     'crispy_bootstrap5',
 ]
