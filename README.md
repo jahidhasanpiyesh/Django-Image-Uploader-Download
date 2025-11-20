@@ -2,6 +2,10 @@
 
 **ImageIQ** is an web application for image processing and analysis. It allows users to upload images, apply transformations, and extract meaningful insights efficiently.
 
+## Screenshots
+
+![Demo_ScreenShots](https://github.com/jahidhasanpiyesh/ImageIQ/blob/main/static/Demo.png)  
+
 **Live Demo:** [Click here to view live](https://imageiq.pythonanywhere.com)
 
 ## Features
